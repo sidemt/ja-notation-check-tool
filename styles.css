@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+}
+
+.output-area {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+}
+
+.highlight {
+  background-color: yellow;
+  border: 1px solid orangered;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-box {
+  width: auto;
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  word-break: keep-all;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+}

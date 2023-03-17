@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Text Highlighter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>freeCodeCamp 日本語翻訳表記チェックツール</h1>
+  <div class="container">
+    <div class="input-area">
+      <label for="input-text">チェックする文字列:</label>
+      <textarea type="text" id="input-text" rows="50"></textarea>
+      <button onclick="checkText()">Highlight</button>
+    </div>
+    <div class="output-area">
+      <p>チェック結果</p>
+      <p id="output-text"></p>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
