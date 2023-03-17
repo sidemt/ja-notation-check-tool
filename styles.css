@@ -8,7 +8,8 @@
   --dark-yellow: #4d3800;
   --blue: #99c9ff;
   --dark-blue: #002ead;
-  --dark-blue-active: #264fc0;
+  --dark-blue-hover: #264fc0;
+  --dark-blue-active: #375dc4;
 }
 
 body {
@@ -89,6 +90,10 @@ h1 {
 }
 
 .check-button:hover {
+  background-color: var(--dark-blue-hover);
+}
+
+.check-button:active {
   background-color: var(--dark-blue-active);
 }
 
