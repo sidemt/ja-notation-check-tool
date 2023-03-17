@@ -2,22 +2,41 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Text Highlighter</title>
+  <title>表記チェックツール - freeCodeCamp 日本語翻訳チーム</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.ico">
 </head>
 <body>
-  <h1>freeCodeCamp 日本語翻訳表記チェックツール</h1>
+  <h1>freeCodeCamp 日本語翻訳チーム用 表記チェックツール</h1>
   <div class="container">
-    <div class="input-area">
-      <label for="input-text">チェックする文字列:</label>
-      <textarea type="text" id="input-text" rows="50"></textarea>
-      <button onclick="checkText()">Highlight</button>
-    </div>
     <div class="output-area">
-      <p>チェック結果</p>
-      <p id="output-text"></p>
+      <div class="editor-header">
+        <h2>チェック結果</h2>
+        <p id="output-notice">誤りは検出されませんでした。</p>
+      </div>
+      <div id="output-text">ここにチェック結果が表示されます。</div>
+    </div>
+    <div class="input-area">
+      <div class="editor-header">
+        <label for="input-text" class="editor-header">チェックする文章</label>
+        <button class="check-button" onclick="checkText()">チェック実行</button>
+      </div>
+      <textarea type="text" id="input-text" placeholder="チェックする文章を入力してください。"></textarea>
     </div>
   </div>
+  <footer>
+    <p>
+      このツールでは、全角半角・スペースの有無に関する表記ルールをチェックします。<br>
+      日本語の用法や文法についてはチェックしませんので、他のツールでチェックしてください。
+    </p>
+    <p>
+      チェック内容は freeCodeCamp 日本語チーム内のルールに基づきます。
+    </p>
+    <p>
+      ソースコード等の特殊な表記が含まれる場合など、正しくチェックできない可能性もありますので、指摘内容については文脈を見て判断してください。
+    </p>
+    <a href="https://github.com/sidemt/japanese-check-tool">GitHub</a>
+  </footer>
   <script src="index.js"></script>
 </body>
 </html>
