@@ -29,53 +29,58 @@ const enabled_rules = {
     hint: "全角スペースが使われています。スペースは半角で入力してください。",
   },
   space_needed: {
-    regex: /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF][a-zA-Z0-9!#-&*-/<-@\\^-~]|[a-zA-Z0-9!#-&*-/<-@\\^-~][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
-    hint: "日本語の文字と英数字の間には、半角スペースを入れてください。"
+    regex:
+      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF][a-zA-Z0-9!#-&*-/<-@\\^-~]|[a-zA-Z0-9!#-&*-/<-@\\^-~][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
+    hint: "日本語の文字と英数字の間には、半角スペースを入れてください。",
   },
   quotes: {
-    regex: /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]["'\(\[].*["'\)\]]|["'\(\[].*["'\)\]][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
-    hint: "半角の括弧や引用符を用いる場合は、引用符の外側に半角スペースを入れてください。"
+    regex:
+      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]["'\(\[].*["'\)\]]|["'\(\[].*["'\)\]][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
+    hint: "半角の括弧や引用符を用いる場合は、引用符の外側に半角スペースを入れてください。",
   },
   colon_semicolon: {
-    regex: /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF][:;][^\s]|[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]\s[:;]/g,
-    hint: "コロン、セミコロンは原則として後ろに半角スペースを入れてください。数学記号やコード例として用いる場合はこの限りではありません。"
+    regex:
+      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF][:;][^\s]|[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]\s[:;]/g,
+    hint: "コロン、セミコロンは原則として後ろに半角スペースを入れてください。数学記号やコード例として用いる場合はこの限りではありません。",
   },
   space_not_needed: {
-    regex: /[\x01-\x7E] [「」！？、。～％・／]|[「」！？、。～％・／] [\x01-\x7E]/g,
-    hint: "全角の記号 (句読点、カギ括弧、％、～など) と半角英数字の間には、スペースは入れないでください。"
+    regex:
+      /[\x01-\x7E] [「」！？、。～％・／]|[「」！？、。～％・／] [\x01-\x7E]/g,
+    hint: "全角の記号 (句読点、カギ括弧、％、～など) と半角英数字の間には、スペースは入れないでください。",
   },
   space_not_needed_ja: {
-    regex: /[^\x01-\x7E] [「」！？、。～％・／]|[「」！？、。～％・／] [^\x01-\x7E]|[^\x01-\x7E] [^\x01-\x7E]/g,
-    hint: "日本語の間に半角スペースが入っています。必要なスペースかどうか確認してください。"
+    regex:
+      /[^\x01-\x7E] [「」！？、。～％・／]|[「」！？、。～％・／] [^\x01-\x7E]|[^\x01-\x7E] [^\x01-\x7E]/g,
+    hint: "日本語の間に半角スペースが入っています。必要なスペースかどうか確認してください。",
   },
   multiple_spaces: {
     regex: / {2,}/g,
-    hint: "半角スペースが連続しています。必要なスペースかどうか確認してください。"
+    hint: "半角スペースが連続しています。必要なスペースかどうか確認してください。",
   },
   wrong_prolonged_mark: {
     regex: /[－—―]/g,
-    hint: "長音記号とよく似た別の記号が使われています。意図した記号かどうか確認してください。"
+    hint: "長音記号とよく似た別の記号が使われています。意図した記号かどうか確認してください。",
   },
-}
+};
 
 function checkText() {
   const input = document.getElementById("input-text").value;
   let stringToCheck = input;
 
-  let suggestions = []
+  let suggestions = [];
 
   for (let key in enabled_rules) {
     let matches = [...input.matchAll(enabled_rules[key].regex)];
-    matches.forEach (match => {
+    matches.forEach((match) => {
       match.rule = key;
-    })
-    suggestions = suggestions.concat(matches)
+    });
+    suggestions = suggestions.concat(matches);
   }
 
   // 検出された suggestions を index 順に並び替え
   suggestions.sort((a, b) => {
     return a.index - b.index;
-  })
+  });
 
   let output = "";
   const notice = document.getElementById("output-notice");
@@ -93,7 +98,10 @@ function checkText() {
       // 先頭から検出された index から末尾までの文字を未処理として残す
       stringToCheck = stringToCheck.slice(0, suggestion.index);
       // ユーザーが入力した HTML タグと区別して扱うために、仮タグを入力
-      let result = target.replace(suggestion[0], `[[[spanstart]]]${suggestion.rule}[[[spanend]]]$&[[[spanclose]]]`);
+      let result = target.replace(
+        suggestion[0],
+        `[[[spanstart]]]${suggestion.rule}[[[spanend]]]$&[[[spanclose]]]`
+      );
       output = result + output;
     }
   }
@@ -102,38 +110,64 @@ function checkText() {
   output = stringToCheck + output;
 
   // ユーザーが入力した HTML タグをサニタイズ
-  output = output.replace(/</g, "&lt;");
-  output = output.replace(/>/g, "&gt;");
-  output = output.replace(/ /g, "&nbsp;");
-  output = output.replace(/"/g, "&quot;");
+  output = sanitizeHTML(output);
 
   // こちらで追加した仮タグを HTML タグにする
-  output = output.replaceAll("[[[spanstart]]]", '<span class="highlight tooltip" data-tooltip-type="');
+  output = output.replaceAll(
+    "[[[spanstart]]]",
+    '<span class="highlight tooltip" data-tooltip-type="'
+  );
   output = output.replaceAll("[[[spanend]]]", '">');
-  output = output.replaceAll("[[[spanclose]]]", '</span>');
+  output = output.replaceAll("[[[spanclose]]]", "</span>");
 
   // 改行文字を HTML タグにする
   output = output.replace(/\n/g, "<br>");
   document.getElementById("output-text").innerHTML = output;
+
+  generateTable(suggestions);
   enableTooltip();
 }
 
-function enableTooltip() {
-  const tooltipElems = document.querySelectorAll('.tooltip');
+function sanitizeHTML(str) {
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/>/g, "&gt;");
+  str = str.replace(/ /g, "&nbsp;");
+  str = str.replace(/"/g, "&quot;");
+  return str;
+}
 
-  tooltipElems.forEach(elem => {
-    elem.addEventListener('mouseover', () => {
+function generateTable(suggestions) {
+  const tbody = document.querySelector("#result-tbody");
+
+  // clear table
+  tbody.innerHTML = "";
+
+  // loop through suggestions and create tables rows
+  suggestions.forEach((suggestion) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><span class="highlight">${sanitizeHTML(suggestion[0])}</span></td>
+      <td>${enabled_rules[suggestion.rule].hint}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function enableTooltip() {
+  const tooltipElems = document.querySelectorAll(".tooltip");
+
+  tooltipElems.forEach((elem) => {
+    elem.addEventListener("mouseover", () => {
       const tooltipType = elem.dataset.tooltipType;
-      const tooltip = document.createElement('div');
-      tooltip.classList.add('tooltip-box');
+      const tooltip = document.createElement("div");
+      tooltip.classList.add("tooltip-box");
       tooltip.textContent = enabled_rules[tooltipType]["hint"];
       elem.appendChild(tooltip);
     });
 
-    elem.addEventListener('mouseout', () => {
-      const tooltip = document.querySelector('.tooltip-box');
+    elem.addEventListener("mouseout", () => {
+      const tooltip = document.querySelector(".tooltip-box");
       tooltip.parentNode.removeChild(tooltip);
     });
   });
 }
-
