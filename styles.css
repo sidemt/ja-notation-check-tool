@@ -186,6 +186,10 @@ h1 {
   padding: 3px;
 }
 
+.table td a {
+  text-decoration: none;
+}
+
 .table span.highlight {
   background-color: var(--yellow);
 }
