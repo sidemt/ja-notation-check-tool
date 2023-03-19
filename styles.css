@@ -130,6 +130,10 @@ h1 {
   outline: 1px solid var(--dark-yellow);
 }
 
+.output.editor-box .focus {
+  outline: 3px solid var(--dark-yellow);
+}
+
 .tooltip {
   position: relative;
   display: inline-block;

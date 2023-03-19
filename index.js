@@ -1,3 +1,7 @@
+window.onhashchange = function () {
+  focusClicked();
+};
+
 // 正規表現
 const enabled_rules = {
   alphanum: {
@@ -100,7 +104,7 @@ function checkText() {
       // ユーザーが入力した HTML タグと区別して扱うために、仮タグを入力
       let result = target.replace(
         suggestion[0],
-        `[[[spanstart]]]${suggestion.rule}[[[spanend]]]$&[[[spanclose]]]`
+        `[[[spanstart]]]${suggestion.index}[[[data-tooltip-type=]]]${suggestion.rule}[[[spanend]]]$&[[[spanclose]]]`
       );
       output = result + output;
     }
@@ -115,7 +119,11 @@ function checkText() {
   // こちらで追加した仮タグを HTML タグにする
   output = output.replaceAll(
     "[[[spanstart]]]",
-    '<span class="highlight tooltip" data-tooltip-type="'
+    '<span class="highlight tooltip" id="'
+  );
+  output = output.replaceAll(
+    "[[[data-tooltip-type=]]]",
+    '" data-tooltip-type="'
   );
   output = output.replaceAll("[[[spanend]]]", '">');
   output = output.replaceAll("[[[spanclose]]]", "</span>");
@@ -146,11 +154,30 @@ function generateTable(suggestions) {
   suggestions.forEach((suggestion) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td><span class="highlight">${sanitizeHTML(suggestion[0])}</span></td>
+      <td><a href="#${suggestion.index}"><span class="highlight">${sanitizeHTML(
+      suggestion[0]
+    )}</span></a></td>
       <td>${enabled_rules[suggestion.rule].hint}</td>
     `;
     tbody.appendChild(tr);
   });
+}
+
+// Focus on the highlighted text when the user clicks on the table row
+function focusClicked() {
+  // clear current focus
+  const alreadyFocused = document.querySelectorAll(".focus");
+  if (alreadyFocused.length > 0) {
+    alreadyFocused.forEach((elem) => {
+      elem.classList.remove("focus");
+    });
+  }
+
+  const urlHash = location.hash;
+  if (urlHash) {
+    const target = document.getElementById(urlHash.slice(1));
+    target.classList.add("focus");
+  }
 }
 
 function enableTooltip() {
