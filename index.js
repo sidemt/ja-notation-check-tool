@@ -39,8 +39,17 @@ const enabled_rules = {
   },
   quotes: {
     regex:
-      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]["'\(\[].*["'\)\]]|["'\(\[].*["'\)\]][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
-    hint: "半角の括弧や引用符を用いる場合は、引用符の外側に半角スペースを入れてください。",
+      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF][\(\[]|[\)\]][\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
+    hint: "半角の括弧や引用符で文字を囲む場合は、外側に半角スペースを入れてください。",
+  },
+  quotes_space_inside: {
+    regex:
+      /[\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF] [\)\]]|[\(\[] [\u3041-\u3096\u30A1-\u30FA々〇〻\u3400-\u9FFF\uF900-\uFAFF\uD840-\uD87F\uDC00-\uDFFF]/g,
+    hint: "半角の括弧や引用符で文字を囲む場合は、原則として外側にだけ半角スペースを入れてください。",
+  },
+  quotes_space_around: {
+    regex: / [\)\]"'] | [\(\["'] /g,
+    hint: "半角の括弧や引用符で文字を囲む場合は、原則として外側にだけ半角スペースを入れてください。",
   },
   colon_semicolon: {
     regex:
