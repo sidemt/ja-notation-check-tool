@@ -2,7 +2,7 @@ window.onhashchange = function () {
   focusClicked();
 };
 
-// 正規表現
+// Regex to detect incorrect notation
 const enabled_rules = {
   alphanum: {
     regex: /[０-９Ａ-Ｚａ-ｚ]/g,
@@ -69,7 +69,7 @@ const enabled_rules = {
 
 function checkText() {
   const input = document.getElementById("input-text").value;
-  let stringToCheck = input;
+  let remainingString = input;
 
   let suggestions = [];
 
@@ -81,7 +81,7 @@ function checkText() {
     suggestions = suggestions.concat(matches);
   }
 
-  // 検出された suggestions を index 順に並び替え
+  // Sort the matched suggestions by index
   suggestions.sort((a, b) => {
     return a.index - b.index;
   });
@@ -93,15 +93,15 @@ function checkText() {
     notice.classList.add("visible");
   } else {
     notice.classList.remove("visible");
-    // テキストの後ろから処理、ハイライト用の要素を追加していく
+    // add tags to highlight the result, starting from the end of the input text
     for (let i = suggestions.length - 1; i >= 0; i--) {
       let suggestion = suggestions[i];
 
-      // 検出された index から末尾までの文字を処理対象として切り出す
-      let target = stringToCheck.slice(suggestion.index);
-      // 先頭から検出された index から末尾までの文字を未処理として残す
-      stringToCheck = stringToCheck.slice(0, suggestion.index);
-      // ユーザーが入力した HTML タグと区別して扱うために、仮タグを入力
+      // set the string from the index to the end as a target
+      let target = remainingString.slice(suggestion.index);
+      // keep the rest of the string, from the beginning to the index, as remaining
+      remainingString = remainingString.slice(0, suggestion.index);
+      // incert placeholder tags so that they can be distinguished from the HTML tags in the original user input
       let result = target.replace(
         suggestion[0],
         `[[[spanstart]]]${suggestion.index}[[[data-tooltip-type=]]]${suggestion.rule}[[[spanend]]]$&[[[spanclose]]]`
@@ -110,13 +110,13 @@ function checkText() {
     }
   }
 
-  // 残りの部分を連結する
-  output = stringToCheck + output;
+  // concat the remaining part
+  output = remainingString + output;
 
-  // ユーザーが入力した HTML タグをサニタイズ
+  // sanitize the HTML tags in the original user input
   output = sanitizeHTML(output);
 
-  // こちらで追加した仮タグを HTML タグにする
+  // convert placeholder tags to HTML tags
   output = output.replaceAll(
     "[[[spanstart]]]",
     '<span class="highlight tooltip" id="'
@@ -128,7 +128,7 @@ function checkText() {
   output = output.replaceAll("[[[spanend]]]", '">');
   output = output.replaceAll("[[[spanclose]]]", "</span>");
 
-  // 改行文字を HTML タグにする
+  // convert newline characters to HTML <br> tags
   output = output.replace(/\n/g, "<br>");
   document.getElementById("output-text").innerHTML = output;
 
