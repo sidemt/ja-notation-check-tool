@@ -8,8 +8,6 @@
   --dark-yellow: #4d3800;
   --blue: #99c9ff;
   --dark-blue: #002ead;
-  --dark-blue-hover: #264fc0;
-  --dark-blue-active: #375dc4;
 }
 
 * {
@@ -33,6 +31,10 @@ h1 {
   margin: 0;
 }
 
+h2.section-heading {
+  margin-bottom: 10px;
+}
+
 .container {
   display: grid;
   grid-auto-columns: 1fr;
@@ -40,52 +42,51 @@ h1 {
   padding: 20px;
 }
 
+.editor-container {
+  /* grid positioning */
+  grid-row: 1;
+  grid-column: 1 / 3;
+  /* nested grid */
+  display: grid;
+  grid-auto-columns: 1fr;
+  gap: 10px;
+}
+
 .editor-header {
-  min-height: 60px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px;
   word-break: keep-all;
 }
 
 .input.editor-header {
-  /* grid positioning */
+  /* nested grid positioning */
   grid-row: 1;
   grid-column: 2 / 3;
 }
 
 .output.editor-header {
-  /* grid positioning */
+  /* nested grid positioning */
   grid-row: 1;
   grid-column: 1 / 2;
 }
 
 .input.editor-box {
-  /* grid positioning */
+  /* nested grid positioning */
   grid-row: 2;
   grid-column: 2 / 3;
 }
 
 .output.editor-box {
-  /* grid positioning */
+  /* nested grid positioning */
   grid-row: 2;
   grid-column: 1 / 2;
   /* other styling */
   border: 1px solid var(--gray80);
   background-color: var(--gray05);
   overflow-wrap: break-word;
-}
-
-.input.editor-footer {
-  /* grid positioning */
-  grid-row: 3;
-  grid-column: 2 / 2;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
 }
 
 .editor-box {
@@ -102,24 +103,6 @@ h1 {
   border-radius: 3px;
 }
 
-.check-button {
-  height: 50px;
-  padding: 0 30px;
-  background-color: var(--dark-blue);
-  color: var(--gray00);
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.check-button:hover {
-  background-color: var(--dark-blue-hover);
-}
-
-.check-button:active {
-  background-color: var(--dark-blue-active);
-}
-
 #output-notice {
   display: none;
 }
@@ -130,6 +113,7 @@ h1 {
   background-color: var(--blue);
   border-radius: 5px;
   padding: 5px;
+  margin: 0;
 }
 
 .highlight {
@@ -166,7 +150,7 @@ h1 {
 }
 
 .result-area {
-  grid-row: 4;
+  grid-row: 2;
   grid-column: 1 / 3;
 }
 
@@ -179,6 +163,7 @@ h1 {
 .table th,
 .table td {
   border: 1px solid var(--gray80);
+  background-color: var(--gray05);
 }
 
 .table th,
@@ -195,7 +180,7 @@ h1 {
 }
 
 .explanation-area {
-  grid-row: 5;
+  grid-row: 3;
   grid-column: 1 / 3;
   text-align: center;
   font-size: 14px;
