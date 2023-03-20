@@ -11,24 +11,20 @@
 <body>
   <h1>freeCodeCamp 日本語翻訳チーム用 表記チェックツール</h1>
   <div class="container">
-    <div class="ouput editor-header">
-      <h2 class="section-heading">チェック結果</h2>
-      <p id="output-notice">誤りは検出されませんでした。</p>
-    </div>
-    <div id="output-text" class="output editor-box">
-      ここにチェック結果が表示されます。
-    </div>
+    <form class="editor-container" oninput="checkText()">
+      <div class="ouput editor-header">
+        <label for="output-text" class="section-heading">チェック結果</label>
+        <p id="output-notice">誤りは検出されませんでした。</p>
+      </div>
+      <output id="output-text" class="output editor-box" for="input-text">
+        ここにチェック結果が表示されます。
+      </output>
 
-    <div class="input editor-header">
-      <label for="input-text" class="section-heading">チェックする文章</label>
-      <button class="check-button" onclick="checkText()">チェック実行</button>
-    </div>
-    <textarea type="text" id="input-text" class="input editor-box" placeholder="チェックする文章を入力してください。"></textarea>
-
-    <div class="input editor-footer">
-      <button class="check-button" onclick="checkText()">チェック実行</button>
-    </div>
-
+      <div class="input editor-header">
+        <label for="input-text" class="section-heading">チェックする文章</label>
+      </div>
+      <textarea type="text" id="input-text" class="input editor-box" placeholder="チェックする文章を入力してください。"></textarea>
+    </form>
     <div class="result-area">
       <h2 class="section-heading">チェック結果一覧</h2>
       <table class="table">
@@ -63,7 +59,7 @@
   </div>
 
   <footer>
-    <a href="https://github.com/sidemt/ja-notation-check-tool">GitHub</a>
+    <a href="https://github.com/sidemt/ja-notation-check-tool" target="_blank" rel="noopener noreferrer">GitHub</a>
   </footer>
   <script src="index.js"></script>
 </body>
